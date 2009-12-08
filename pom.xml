@@ -27,7 +27,6 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
@@ -45,4 +44,12 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>codeartisans-snapshots</id>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
