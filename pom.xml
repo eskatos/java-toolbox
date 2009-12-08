@@ -46,6 +46,10 @@
     </dependencies>
 
     <distributionManagement>
+        <repository>
+            <id>codeartisans-releases</id>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-releases</url>
+        </repository>
         <snapshotRepository>
             <id>codeartisans-snapshots</id>
             <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-snapshots</url>
