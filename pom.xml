@@ -52,12 +52,12 @@
 
     <distributionManagement>
         <repository>
-            <id>codeartisans-releases</id>
-            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-public-releases</url>
+            <id>codeartisans-public-releases</id>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>codeartisans-snapshots</id>
-            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-public-snapshots</url>
+            <id>codeartisans-public-snapshots</id>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
