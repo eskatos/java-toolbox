@@ -20,11 +20,16 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
         </plugins>
@@ -48,11 +53,11 @@
     <distributionManagement>
         <repository>
             <id>codeartisans-releases</id>
-            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-releases</url>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-public-releases</url>
         </repository>
         <snapshotRepository>
             <id>codeartisans-snapshots</id>
-            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-snapshots</url>
+            <url>https://codebox.codeartisans.org/nexus/content/repositories/codeartisans-public-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
