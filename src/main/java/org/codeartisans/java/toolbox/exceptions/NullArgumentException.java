@@ -84,19 +84,13 @@ public final class NullArgumentException
         }
     }
 
-    public static void ensureNotZero(String name, int value)
-            throws NullArgumentException
-    {
-        if (value == 0) {
-            throw new NullArgumentException(name + WAS_ZERO);
-        }
-    }
-
     public static void ensureNotZero(String name, Integer value)
             throws NullArgumentException
     {
         ensureNotNull(name, value);
-        ensureNotZero(name, value);
+        if (value == 0) {
+            throw new NullArgumentException(name + WAS_ZERO);
+        }
     }
 
 }
