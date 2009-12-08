@@ -491,7 +491,7 @@ public final class Resources
         String value = bundle.getString(key);
         try {
             DateFormat format =
-                       DateFormat.getDateInstance(DateFormat.DEFAULT, m_locale);
+                    DateFormat.getDateInstance(DateFormat.DEFAULT, m_locale);
             return format.parse(value);
         } catch (ParseException pe) {
             throw new MissingResourceException("Expecting a date value but got " + value,
@@ -536,7 +536,7 @@ public final class Resources
         String value = bundle.getString(key);
         try {
             DateFormat format =
-                       DateFormat.getTimeInstance(DateFormat.DEFAULT, m_locale);
+                    DateFormat.getTimeInstance(DateFormat.DEFAULT, m_locale);
             return format.parse(value);
         } catch (ParseException pe) {
             throw new MissingResourceException("Expecting a time value but got " + value,
@@ -581,7 +581,7 @@ public final class Resources
         String value = bundle.getString(key);
         try {
             DateFormat format =
-                       DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, m_locale);
+                    DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, m_locale);
             return format.parse(value);
         } catch (ParseException pe) {
             throw new MissingResourceException("Expecting a time value but got " + value,

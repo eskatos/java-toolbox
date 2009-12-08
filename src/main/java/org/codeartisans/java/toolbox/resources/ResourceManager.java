@@ -39,7 +39,7 @@ public final class ResourceManager
      * Resource lookup table.
      */
     private static final HashMap<String, WeakReference<Resources>> RESOURCES =
-                                                                   new HashMap<String, WeakReference<Resources>>();
+            new HashMap<String, WeakReference<Resources>>();
 
     /**
      * Private Constructor to block instantiation.
