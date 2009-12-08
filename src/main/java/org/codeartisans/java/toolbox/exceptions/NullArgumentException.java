@@ -9,6 +9,7 @@ public final class NullArgumentException
     private static final long serialVersionUID = 1L;
     private static final String WAS_NULL = " was null.";
     private static final String WAS_EMPTY = " was empty.";
+    private static final String WAS_ZERO = " was zero.";
 
     private NullArgumentException(String message)
     {
@@ -81,6 +82,21 @@ public final class NullArgumentException
                 ensureNotEmpty(value[i] + "[" + i + "]", value[i].trim());
             }
         }
+    }
+
+    public static void ensureNotZero(String name, int value)
+            throws NullArgumentException
+    {
+        if (value == 0) {
+            throw new NullArgumentException(name + WAS_ZERO);
+        }
+    }
+
+    public static void ensureNotZero(String name, Integer value)
+            throws NullArgumentException
+    {
+        ensureNotNull(name, value);
+        ensureNotZero(name, value);
     }
 
 }
