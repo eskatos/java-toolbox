@@ -44,7 +44,7 @@ public class EnvironmentException
      *
      * @param cause the underlying exception that caused the failure
      */
-    EnvironmentException(final Throwable cause)
+    public EnvironmentException(final Throwable cause)
     {
         super();
 
@@ -59,7 +59,7 @@ public class EnvironmentException
      *
      * @param message the reason for the access failure
      */
-    EnvironmentException(final String message)
+    public EnvironmentException(final String message)
     {
         super(message);
 
@@ -75,7 +75,7 @@ public class EnvironmentException
      * @param variable the variable whose value was to be accessed
      * @param cause    the underlying exception that caused the failure
      */
-    EnvironmentException(final String variable, final Throwable cause)
+    public EnvironmentException(final String variable, final Throwable cause)
     {
         super();
 
@@ -91,7 +91,7 @@ public class EnvironmentException
      * @param variable the variable whose value was to be accessed
      * @param message  the reason for the access failure
      */
-    EnvironmentException(final String variable, final String message)
+    public EnvironmentException(final String variable, final String message)
     {
         super(message);
 
