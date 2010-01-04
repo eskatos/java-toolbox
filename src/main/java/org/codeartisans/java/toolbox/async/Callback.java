@@ -24,7 +24,7 @@ package org.codeartisans.java.toolbox.async;
 /**
  * @author Paul Merlin <paul@nosphere.org>
  */
-public interface AsyncCallback<T>
+public interface Callback<T>
 {
 
     void onSuccess(T value);
