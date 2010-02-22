@@ -21,6 +21,7 @@
  */
 package org.codeartisans.java.toolbox.exceptions;
 
+import java.util.Collection;
 import java.util.Properties;
 
 /**
@@ -70,6 +71,15 @@ public final class NullArgumentException
     {
         ensureNotNull(name, value);
         if (value.length == 0) {
+            throw new NullArgumentException(name + WAS_EMPTY);
+        }
+    }
+
+    public static void ensureNotEmpty(String name, Collection value)
+            throws NullArgumentException
+    {
+        ensureNotNull(name, value);
+        if (value.size() == 0) {
             throw new NullArgumentException(name + WAS_EMPTY);
         }
     }
