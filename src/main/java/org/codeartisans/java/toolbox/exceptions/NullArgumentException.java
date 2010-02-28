@@ -36,60 +36,57 @@ public final class NullArgumentException
     private static final String WAS_EMPTY = " was empty.";
     private static final String WAS_ZERO = " was zero.";
 
-    private NullArgumentException(String message)
+    private NullArgumentException( String message )
     {
-        super(message);
+        super( message );
     }
 
-    public static void ensureNotNull(String name, Object value)
+    public static void ensureNotNull( String name, Object value )
     {
-        if (value != null) {
+        if ( value != null ) {
             return;
         }
-        throw new NullArgumentException(name + WAS_NULL);
+        throw new NullArgumentException( name + WAS_NULL );
     }
 
-    public static void ensureNotEmpty(String name, String value)
+    public static void ensureNotEmpty( String name, String value )
     {
-        ensureNotNull(name, value);
-        if (value.length() == 0) {
-            throw new NullArgumentException(name + WAS_EMPTY);
+        ensureNotNull( name, value );
+        if ( value.length() == 0 ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
-    public static void ensureNotEmpty(String name, boolean trim, String value)
+    public static void ensureNotEmpty( String name, boolean trim, String value )
     {
-        ensureNotNull(name, value);
-        if (value.length() == 0 || (trim && value.trim().length() == 0)) {
+        ensureNotNull( name, value );
+        if ( value.length() == 0 || ( trim && value.trim().length() == 0 ) ) {
 
-            throw new NullArgumentException(name + WAS_EMPTY);
+            throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
-    public static void ensureNotEmpty(String name, Object[] value)
-            throws NullArgumentException
+    public static void ensureNotEmpty( String name, Object[] value )
     {
-        ensureNotNull(name, value);
-        if (value.length == 0) {
-            throw new NullArgumentException(name + WAS_EMPTY);
+        ensureNotNull( name, value );
+        if ( value.length == 0 ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
-    public static void ensureNotEmpty(String name, Collection value)
-            throws NullArgumentException
+    public static void ensureNotEmpty( String name, Collection value )
     {
-        ensureNotNull(name, value);
-        if (value.size() == 0) {
-            throw new NullArgumentException(name + WAS_EMPTY);
+        ensureNotNull( name, value );
+        if ( value.size() == 0 ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
-    public static void ensureNotEmpty(String name, Properties value)
-            throws NullArgumentException
+    public static void ensureNotEmpty( String name, Properties value )
     {
-        ensureNotNull(name, value);
-        if (value.isEmpty()) {
-            throw new NullArgumentException(name + WAS_EMPTY);
+        ensureNotNull( name, value );
+        if ( value.isEmpty() ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
@@ -97,33 +94,30 @@ public final class NullArgumentException
      * Ensures that the string array instance is not null and that it has entries that are not null or empty
      * either without trimming the string.
      */
-    public static void ensureNotEmptyContent(String name, String[] value)
-            throws NullArgumentException
+    public static void ensureNotEmptyContent( String name, String[] value )
     {
-        ensureNotEmptyContent(name, false, value);
+        ensureNotEmptyContent( name, false, value );
     }
 
     /**
      * Ensures that the string array instance is not null and that it has entries that are not null or empty.
      */
-    public static void ensureNotEmptyContent(String name, boolean trim, String[] value)
-            throws NullArgumentException
+    public static void ensureNotEmptyContent( String name, boolean trim, String[] value )
     {
-        ensureNotEmpty(name, value);
-        for (int i = 0; i < value.length; i++) {
-            ensureNotEmpty(value[i] + "[" + i + "]", value[i]);
-            if (trim) {
-                ensureNotEmpty(value[i] + "[" + i + "]", value[i].trim());
+        ensureNotEmpty( name, value );
+        for ( int i = 0; i < value.length; i++ ) {
+            ensureNotEmpty( value[i] + "[" + i + "]", value[i] );
+            if ( trim ) {
+                ensureNotEmpty( value[i] + "[" + i + "]", value[i].trim() );
             }
         }
     }
 
-    public static void ensureNotZero(String name, Integer value)
-            throws NullArgumentException
+    public static void ensureNotZero( String name, Integer value )
     {
-        ensureNotNull(name, value);
-        if (value == 0) {
-            throw new NullArgumentException(name + WAS_ZERO);
+        ensureNotNull( name, value );
+        if ( value == 0 ) {
+            throw new NullArgumentException( name + WAS_ZERO );
         }
     }
 

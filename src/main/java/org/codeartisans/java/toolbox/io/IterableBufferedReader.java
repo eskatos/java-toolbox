@@ -28,13 +28,13 @@ import java.util.Iterator;
 /**
  * @author Paul Merlin <paul@nosphere.org>
  */
-public class IterableBufferedReader
+public final class IterableBufferedReader
         implements Iterable<String>
 {
 
     private final BufferedReader reader;
 
-    public IterableBufferedReader(BufferedReader reader)
+    public IterableBufferedReader( BufferedReader reader )
     {
         this.reader = reader;
     }
@@ -45,7 +45,7 @@ public class IterableBufferedReader
         return new BufferedReaderIterator();
     }
 
-    class BufferedReaderIterator
+    private class BufferedReaderIterator
             implements Iterator<String>
     {
 
@@ -55,8 +55,8 @@ public class IterableBufferedReader
         {
             try {
                 nextline = reader.readLine();
-            } catch (IOException ex) {
-                throw new IllegalArgumentException(ex);
+            } catch ( IOException ex ) {
+                throw new IllegalArgumentException( ex );
             }
         }
 
@@ -71,22 +71,22 @@ public class IterableBufferedReader
         {
             try {
                 String result = nextline;
-                if (nextline != null) {
+                if ( nextline != null ) {
                     nextline = reader.readLine();
-                    if (nextline == null) {
+                    if ( nextline == null ) {
                         reader.close();
                     }
                 }
                 return result;
-            } catch (IOException ex) {
-                throw new IllegalArgumentException(ex);
+            } catch ( IOException ex ) {
+                throw new IllegalArgumentException( ex );
             }
         }
 
         @Override
         public void remove()
         {
-            throw new UnsupportedOperationException(this.getClass().getSimpleName() + " is read only");
+            throw new UnsupportedOperationException( this.getClass().getSimpleName() + " is read only" );
         }
 
     }
