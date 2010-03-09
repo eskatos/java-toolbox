@@ -24,6 +24,7 @@ package org.codeartisans.java.toolbox.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Paul Merlin <paul@nosphere.org>
@@ -33,10 +34,17 @@ public final class IterableBufferedReader
 {
 
     private final BufferedReader reader;
+    private final Integer maxLines;
 
     public IterableBufferedReader( BufferedReader reader )
     {
+        this( reader, -1 );
+    }
+
+    public IterableBufferedReader( BufferedReader reader, Integer maxLines )
+    {
         this.reader = reader;
+        this.maxLines = maxLines;
     }
 
     @Override
@@ -50,11 +58,14 @@ public final class IterableBufferedReader
     {
 
         private String nextline;
+        private Integer linesRead = 0;
 
         public BufferedReaderIterator()
         {
             try {
-                nextline = reader.readLine();
+                if ( maxLines != 0 ) {
+                    nextline = reader.readLine();
+                }
             } catch ( IOException ex ) {
                 throw new IllegalArgumentException( ex );
             }
@@ -63,6 +74,9 @@ public final class IterableBufferedReader
         @Override
         public boolean hasNext()
         {
+            if ( maxLines > 0 && maxLines <= linesRead ) {
+                return false;
+            }
             return nextline != null;
         }
 
@@ -70,6 +84,10 @@ public final class IterableBufferedReader
         public String next()
         {
             try {
+
+                if ( maxLines > 0 && maxLines <= linesRead ) {
+                    throw new NoSuchElementException();
+                }
                 String result = nextline;
                 if ( nextline != null ) {
                     nextline = reader.readLine();
@@ -77,6 +95,7 @@ public final class IterableBufferedReader
                         reader.close();
                     }
                 }
+                linesRead++;
                 return result;
             } catch ( IOException ex ) {
                 throw new IllegalArgumentException( ex );
