@@ -31,9 +31,9 @@ import java.lang.annotation.Target;
 /**
  * @author Paul Merlin <p.merlin@nosphere.org>
  */
-@Target(ElementType.TYPE)
+@Target( ElementType.TYPE )
 @Inherited
-@Retention(RetentionPolicy.SOURCE)
+@Retention( RetentionPolicy.SOURCE )
 @Documented
 public @interface PublicNoArgConstructor
 {

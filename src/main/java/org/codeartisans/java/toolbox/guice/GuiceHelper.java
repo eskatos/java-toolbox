@@ -38,26 +38,26 @@ public final class GuiceHelper
 
     public static void enableDebugOutput()
     {
-        Logger guiceLogger = Logger.getLogger("com.google.inject");
-        guiceLogger.addHandler(new ConsoleHandler()
+        Logger guiceLogger = Logger.getLogger( "com.google.inject" );
+        guiceLogger.addHandler( new ConsoleHandler()
         {
 
             {
-                setLevel(Level.ALL);
-                setFormatter(new java.util.logging.Formatter()
+                setLevel( Level.ALL );
+                setFormatter( new java.util.logging.Formatter()
                 {
 
                     @Override
-                    public String format(LogRecord record)
+                    public String format( LogRecord record )
                     {
-                        return String.format("[Guice] %s%n", record.getMessage());
+                        return String.format( "[Guice] %s%n", record.getMessage() );
                     }
 
-                });
+                } );
             }
 
-        });
-        guiceLogger.setLevel(Level.ALL);
+        } );
+        guiceLogger.setLevel( Level.ALL );
     }
 
 }

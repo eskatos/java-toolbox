@@ -27,8 +27,8 @@ package org.codeartisans.java.toolbox.async;
 public interface Callback<T>
 {
 
-    void onSuccess(T value);
+    void onSuccess( T value );
 
-    void onError(String message, Throwable cause);
+    void onError( String message, Throwable cause );
 
 }
