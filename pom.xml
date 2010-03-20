@@ -17,6 +17,10 @@
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
+    <scm>
+        <developerConnection>scm:git:ssh://gitosis@codebox.codeartisans.org/${project.artifactId}.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.google.inject</groupId>
