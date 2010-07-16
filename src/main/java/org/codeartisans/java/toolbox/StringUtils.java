@@ -27,6 +27,10 @@ package org.codeartisans.java.toolbox;
 public final class StringUtils
 {
 
+    public static final String EMPTY = "";
+
+    public static final char[] EMPTY_CHAR_ARRAY = EMPTY.toCharArray();
+
     private StringUtils()
     {
     }

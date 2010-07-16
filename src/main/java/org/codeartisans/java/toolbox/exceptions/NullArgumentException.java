@@ -22,6 +22,7 @@
 package org.codeartisans.java.toolbox.exceptions;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -32,8 +33,11 @@ public final class NullArgumentException
 {
 
     private static final long serialVersionUID = 1L;
+
     private static final String WAS_NULL = " was null.";
+
     private static final String WAS_EMPTY = " was empty.";
+
     private static final String WAS_ZERO = " was zero.";
 
     private NullArgumentException( String message )
@@ -74,15 +78,24 @@ public final class NullArgumentException
         }
     }
 
-    public static void ensureNotEmpty( String name, Collection value )
+    public static void ensureNotEmpty( String name, Collection<?> value )
     {
         ensureNotNull( name, value );
-        if ( value.size() == 0 ) {
+        if ( value.isEmpty() ) {
             throw new NullArgumentException( name + WAS_EMPTY );
         }
     }
 
     public static void ensureNotEmpty( String name, Properties value )
+    {
+        ensureNotNull( name, value );
+        if ( value.isEmpty() ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
+        }
+    }
+
+    public static void ensureNotEmpty( String name, Map<?, ?> value )
+            throws NullArgumentException
     {
         ensureNotNull( name, value );
         if ( value.isEmpty() ) {
