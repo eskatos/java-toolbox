@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
- * @author Paul Merlin <paul@nosphere.org>
+ * @author Paul Merlin
  */
 public final class CollectionUtils
 {
