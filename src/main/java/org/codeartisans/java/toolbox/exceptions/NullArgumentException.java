@@ -61,6 +61,14 @@ public final class NullArgumentException
         }
     }
 
+    public static void ensureNotEmpty( String name, CharSequence value )
+    {
+        ensureNotNull( name, value );
+        if ( value.length() == 0 ) {
+            throw new NullArgumentException( name + WAS_EMPTY );
+        }
+    }
+
     public static void ensureNotEmpty( String name, boolean trim, String value )
     {
         ensureNotNull( name, value );
