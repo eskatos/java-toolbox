@@ -27,6 +27,14 @@
         <developerConnection>scm:git:ssh://gitosis@codebox.codeartisans.org/${project.artifactId}.git</developerConnection>
     </scm>
 
+    <developers>
+        <developer>
+            <id>paul@nosphere.org</id>
+            <name>Paul Merlin</name>
+            <email>paul@nosphere.org</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>com.google.inject</groupId>
