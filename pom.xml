@@ -8,7 +8,7 @@
         <version>5</version>
     </parent>
 
-    <groupId>org.codeartisans.java</groupId>
+    <groupId>org.codeartisans</groupId>
     <artifactId>java-toolbox</artifactId>
     <version>1.2-SNAPSHOT</version>
 
