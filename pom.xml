@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.codeartisans</groupId>
         <artifactId>codeartisans-parent</artifactId>
-        <version>4</version>
+        <version>5</version>
     </parent>
 
     <groupId>org.codeartisans.java</groupId>
@@ -14,17 +14,21 @@
 
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+    <url>http://github.com/Codeartisans/java-toolbox</url>
 
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
+            <comments>Copyrights retained by each developer.</comments>
         </license>
     </licenses>
 
     <scm>
-        <developerConnection>scm:git:ssh://gitosis@codebox.codeartisans.org/${project.artifactId}.git</developerConnection>
+        <url>scm:git:git@github.com:Codeartisans/java-toolbox.git</url>
+        <connection>scm:git:git@github.com:Codeartisans/java-toolbox.git</connection>
+        <developerConnection>scm:git:git@github.com:Codeartisans/java-toolbox.git</developerConnection>
     </scm>
 
     <developers>
