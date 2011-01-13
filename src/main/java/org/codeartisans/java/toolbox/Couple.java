@@ -17,7 +17,6 @@ public class Couple<L, R>
 {
 
     private final L left;
-
     private final R right;
 
     public Couple( L left, R right )
@@ -26,14 +25,43 @@ public class Couple<L, R>
         this.right = right;
     }
 
-    public L left()
+    public final L left()
     {
         return left;
     }
 
-    public R right()
+    public final R right()
     {
         return right;
+    }
+
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( obj == null ) {
+            return false;
+        }
+        if ( getClass() != obj.getClass() ) {
+            return false;
+        }
+        @SuppressWarnings( "unchecked" )
+        final Couple<L, R> other = ( Couple<L, R> ) obj;
+        if ( this.left != other.left && ( this.left == null || !this.left.equals( other.left ) ) ) {
+            return false;
+        }
+        if ( this.right != other.right && ( this.right == null || !this.right.equals( other.right ) ) ) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 79 * hash + ( this.left != null ? this.left.hashCode() : 0 );
+        hash = 79 * hash + ( this.right != null ? this.right.hashCode() : 0 );
+        return hash;
     }
 
 }
