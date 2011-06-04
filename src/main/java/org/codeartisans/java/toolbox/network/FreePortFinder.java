@@ -27,25 +27,40 @@ public final class FreePortFinder
     {
     }
 
+    public static boolean isFree( int port )
+    {
+        return isFree( null, port );
+    }
+
+    public static boolean isFree( InetAddress address, int port )
+    {
+        try {
+            new ServerSocket( port, 1, address ).close();
+            return true;
+        } catch ( IOException ex ) {
+            return false;
+        }
+    }
+
     public static int findRandom()
             throws IOException
     {
         return findRandomOnIface( null );
     }
 
-    public static int findWithPreference( final int prefered )
+    public static int findWithPreference( int prefered )
             throws IOException
     {
         return findOnIfaceWithPreference( null, prefered );
     }
 
-    public static int findRandomOnIface( final InetAddress address )
+    public static int findRandomOnIface( InetAddress address )
             throws IOException
     {
         return findOnIfaceWithPreference( address, -1 );
     }
 
-    public static int findOnIfaceWithPreference( final InetAddress address, final int prefered )
+    public static int findOnIfaceWithPreference( InetAddress address, int prefered )
             throws IOException
     {
         ServerSocket server;
