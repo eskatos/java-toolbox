@@ -13,6 +13,8 @@
  */
 package org.codeartisans.java.toolbox;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,9 +41,42 @@ public final class StringUtils
         return array == null || array.length <= 0;
     }
 
-    public static StringBuffer renderTemplate( final StringBuffer template,
-                                               final Map<String, String> dict,
-                                               final boolean removeUnknown )
+    public static String join( String[] strings )
+    {
+        return join( Arrays.asList( strings ) );
+    }
+
+    public static String join( String[] strings, String delimiter )
+    {
+        return join( Arrays.asList( strings ), delimiter );
+    }
+
+    public static String join( Iterable<? extends CharSequence> strings )
+    {
+        return join( strings, "" );
+    }
+
+    public static String join( Iterable<? extends CharSequence> strings, String delimiter )
+    {
+        int capacity = 0;
+        int delimLength = delimiter.length();
+        Iterator<? extends CharSequence> iter = strings.iterator();
+        if ( iter.hasNext() ) {
+            capacity += iter.next().length() + delimLength;
+        }
+        StringBuilder buffer = new StringBuilder( capacity );
+        iter = strings.iterator();
+        if ( iter.hasNext() ) {
+            buffer.append( iter.next() );
+            while ( iter.hasNext() ) {
+                buffer.append( delimiter );
+                buffer.append( iter.next() );
+            }
+        }
+        return buffer.toString();
+    }
+
+    public static StringBuffer renderTemplate( StringBuffer template, Map<String, String> dict, boolean removeUnknown )
     {
         final Matcher matcher = TEMPLATE_TOKEN_PATTERN.matcher( template );
         final StringBuffer buffer = new StringBuffer();
@@ -62,8 +97,7 @@ public final class StringUtils
         return buffer;
     }
 
-    public static StringBuffer renderTemplate( final StringBuffer template,
-                                               final Map<String, String> dict )
+    public static StringBuffer renderTemplate( StringBuffer template, Map<String, String> dict )
     {
         return renderTemplate( template, dict, false );
     }
