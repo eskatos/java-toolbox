@@ -25,6 +25,14 @@ public final class CollectionUtils
     {
     }
 
+    public static boolean isEmpty( Iterable<?> iterable )
+    {
+        if ( iterable == null ) {
+            return true;
+        }
+        return iterable.iterator().hasNext();
+    }
+
     public static <T> T firstElementOrNull( final Iterable<T> iterable )
     {
         if ( iterable == null ) {

@@ -14,6 +14,7 @@
 package org.codeartisans.java.toolbox;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,6 +67,44 @@ public final class StringUtils
                                                final Map<String, String> dict )
     {
         return renderTemplate( template, dict, false );
+    }
+
+    public static String random( int count, int start, int end, boolean letters, boolean numbers, char[] chars, Random random )
+    {
+        if ( count == 0 ) {
+            return "";
+        } else if ( count < 0 ) {
+            throw new IllegalArgumentException( "Requested random string length " + count + " is less than 0." );
+        }
+        if ( ( start == 0 ) && ( end == 0 ) ) {
+            end = 'z' + 1;
+            start = ' ';
+            if ( !letters && !numbers ) {
+                start = 0;
+                end = Integer.MAX_VALUE;
+            }
+        }
+
+        StringBuilder buffer = new StringBuilder();
+        int gap = end - start;
+
+        while ( count-- != 0 ) {
+            char ch;
+            if ( chars == null ) {
+                ch = ( char ) ( random.nextInt( gap ) + start );
+            } else {
+                ch = chars[random.nextInt( gap ) + start];
+            }
+            if ( ( letters && numbers && Character.isLetterOrDigit( ch ) )
+                    || ( letters && Character.isLetter( ch ) )
+                    || ( numbers && Character.isDigit( ch ) )
+                    || ( !letters && !numbers ) ) {
+                buffer.append( ch );
+            } else {
+                count++;
+            }
+        }
+        return buffer.toString();
     }
 
 }
