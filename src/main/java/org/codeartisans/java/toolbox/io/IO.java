@@ -15,6 +15,8 @@ package org.codeartisans.java.toolbox.io;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +24,19 @@ import java.sql.Statement;
 
 public final class IO
 {
+
+    public static final int DEFAULT_BUFFER_SIZE = 4096;
+
+    public static void copy( Reader input, Writer output )
+            throws IOException
+    {
+        char[] buffer = new char[ DEFAULT_BUFFER_SIZE ];
+        int reads = 1;
+        while ( ( reads = input.read( buffer ) ) != -1 ) {
+            output.write( buffer, 0, reads );
+        }
+        output.flush();
+    }
 
     public static void closeSilently( Closeable closeable )
     {

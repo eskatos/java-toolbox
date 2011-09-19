@@ -13,22 +13,29 @@
  */
 package org.codeartisans.java.toolbox;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.codeartisans.java.toolbox.io.IO;
+
 public final class StringUtils
 {
 
+    public static final String EMPTY = "";
+    public static final String SPACE = " ";
+    public static final String TAB = "\t";
+    public static final String NEWLINE = "\n";
+    public static final char[] EMPTY_CHAR_ARRAY = EMPTY.toCharArray();
     private static final String TEMPLATE_TOKEN_PATTERN_STR = "\\$\\{([^}]+)\\}";
     private static final Pattern TEMPLATE_TOKEN_PATTERN = Pattern.compile( TEMPLATE_TOKEN_PATTERN_STR );
-    public static final String EMPTY = "";
-    public static final char[] EMPTY_CHAR_ARRAY = EMPTY.toCharArray();
-
-    private StringUtils()
-    {
-    }
+    private static final String ERROR_STRINGREADER_ON_STRING = "Unable to read a String using a StringReader, something went really bad!";
 
     public static boolean isEmpty( String s )
     {
@@ -38,6 +45,100 @@ public final class StringUtils
     public static boolean isEmpty( char[] array )
     {
         return array == null || array.length <= 0;
+    }
+
+    public static String toString( Reader input )
+            throws IOException
+    {
+        StringWriter builder = new StringWriter();
+        IO.copy( input, builder );
+        return builder.toString();
+    }
+
+    public static String indentTwoSpaces( String input, int level )
+    {
+        try {
+            return indentTwoSpaces( new StringReader( input ), level );
+        } catch ( IOException ex ) {
+            throw new RuntimeException( ERROR_STRINGREADER_ON_STRING, ex );
+        }
+    }
+
+    public static String indentTab( String input, int level )
+    {
+        try {
+            return indentTab( new StringReader( input ), level );
+        } catch ( IOException ex ) {
+            throw new RuntimeException( ERROR_STRINGREADER_ON_STRING, ex );
+        }
+    }
+
+    public static String indent( String input, int level, String tab )
+    {
+        try {
+            return indent( new StringReader( input ), level, tab, EMPTY );
+        } catch ( IOException ex ) {
+            throw new RuntimeException( ERROR_STRINGREADER_ON_STRING, ex );
+        }
+    }
+
+    public static String indent( String input, int level, String tab, String prefix )
+    {
+        try {
+            return indent( new StringReader( input ), level, tab, prefix );
+        } catch ( IOException ex ) {
+            throw new RuntimeException( ERROR_STRINGREADER_ON_STRING, ex );
+        }
+    }
+
+    public static String indentTwoSpaces( Reader input, int level )
+            throws IOException
+    {
+        return indent( input, level, "  " );
+    }
+
+    public static String indentTab( Reader input, int level )
+            throws IOException
+    {
+        return indent( input, level, TAB );
+    }
+
+    public static String indent( Reader input, int level, String tab )
+            throws IOException
+    {
+        return indent( input, level, tab, EMPTY );
+    }
+
+    public static String indent( Reader input, int level, String tab, String prefix )
+            throws IOException
+    {
+        BufferedReader reader = new BufferedReader( input );
+        StringBuilder output = new StringBuilder();
+        try {
+
+            String eachLine = reader.readLine();
+            if ( !isEmpty( eachLine ) ) {
+                appendIndent( output, level, tab ).append( prefix ).append( eachLine );
+                while ( ( eachLine = reader.readLine() ) != null ) {
+                    output.append( NEWLINE );
+                    if ( !isEmpty( eachLine ) ) {
+                        appendIndent( output, level, tab ).append( prefix ).append( eachLine );
+                    }
+                }
+            }
+            return output.toString();
+
+        } finally {
+            IO.closeSilently( reader );
+        }
+    }
+
+    private static StringBuilder appendIndent( StringBuilder output, int level, String tab )
+    {
+        for ( int indent = 0; indent < level; indent++ ) {
+            output.append( tab );
+        }
+        return output;
     }
 
     public static StringBuffer renderTemplate( final StringBuffer template,
@@ -55,7 +156,7 @@ public final class StringUtils
                     String quotedReplacement = Matcher.quoteReplacement( replacement );
                     matcher.appendReplacement( buffer, quotedReplacement );
                 } else if ( removeUnknown ) {
-                    matcher.appendReplacement( buffer, "" );
+                    matcher.appendReplacement( buffer, EMPTY );
                 }
             }
         }
@@ -105,6 +206,10 @@ public final class StringUtils
             }
         }
         return buffer.toString();
+    }
+
+    private StringUtils()
+    {
     }
 
 }
