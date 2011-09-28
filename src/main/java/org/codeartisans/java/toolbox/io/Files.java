@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
+// TODO Handle symlinks, if it is costly, make it optionnal
 public final class Files
 {
 
@@ -40,6 +41,15 @@ public final class Files
         }
         if ( exception != null ) {
             throw exception;
+        }
+    }
+
+    public static void deleteSilently( File... paths )
+    {
+        try {
+            delete( paths );
+        } catch ( IOException ignored ) {
+            // Ignored
         }
     }
 
