@@ -13,10 +13,7 @@
  */
 package org.codeartisans.java.toolbox;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 public final class CollectionUtils
 {
@@ -46,10 +43,53 @@ public final class CollectionUtils
         }
     }
 
+    public static <T> List<T> filter( List<T> list, Filter<T>... filters )
+    {
+        if ( Arrays.isEmpty( filters ) ) {
+            return new ArrayList<T>( list );
+        }
+        return filterToList( list, filters );
+    }
+
+    public static <T> Collection<T> filter( Collection<T> list, Filter<T>... filters )
+    {
+        if ( Arrays.isEmpty( filters ) ) {
+            return new ArrayList<T>( list );
+        }
+        return filterToList( list, filters );
+    }
+
+    public static <T> Iterable<T> filter( Iterable<T> list, Filter<T>... filters )
+    {
+        if ( Arrays.isEmpty( filters ) ) {
+            List<T> copy = new ArrayList<T>();
+            for ( T each : list ) {
+                copy.add( each );
+            }
+            return copy;
+        }
+        return filterToList( list, filters );
+    }
+
+    private static <T> List<T> filterToList( Iterable<T> source, Filter<T>... filters )
+    {
+        List<T> dest = new ArrayList<T>();
+        for ( T each : source ) {
+            filter_loop:
+            for ( Filter<T> filter : filters ) {
+                if ( filter.accept( each ) ) {
+                    dest.add( each );
+                    break filter_loop;
+                }
+            }
+        }
+        return dest;
+    }
+
     /**
      * @param oldCollection A Collection
      * @param newCollection Another Collection
-     * @return              True iff both collection are null or contains the same elements, false otherwise.
+     * @return True iff both collection are null or contains the same elements, false otherwise.
      */
     public static boolean collectionEquals( Collection<?> oldCollection, Collection<?> newCollection )
     {
@@ -63,10 +103,10 @@ public final class CollectionUtils
     }
 
     /**
-     * @param <T>   Type of collection elements.
-     * @param left  Left collection of query. Treated as an empty collection if null.
+     * @param <T> Type of collection elements.
+     * @param left Left collection of query. Treated as an empty collection if null.
      * @param right Right collection of query. Treated as an empty collection if null.
-     * @return      A collection containing elements from the left collection not present in the right collection.
+     * @return A collection containing elements from the left collection not present in the right collection.
      */
     public static <T> Collection<T> removed( Collection<T> left, Collection<T> right )
     {
@@ -86,10 +126,10 @@ public final class CollectionUtils
     }
 
     /**
-     * @param <T>   Type of collection elements.
-     * @param left  Left collection of query. Treated as an empty collection if null.
+     * @param <T> Type of collection elements.
+     * @param left Left collection of query. Treated as an empty collection if null.
      * @param right Right collection of query. Treated as an empty collection if null.
-     * @return      A collection containing elements from the right collection not present in the left collection.
+     * @return A collection containing elements from the right collection not present in the left collection.
      */
     public static <T> Collection<T> added( Collection<T> left, Collection<T> right )
     {

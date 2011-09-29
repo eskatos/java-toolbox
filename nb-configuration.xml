@@ -51,5 +51,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.tab-size>8</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.tab-size>
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.spaceWithinIfParens>true</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.spaceWithinIfParens>
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.methodDeclBracePlacement>NEW_LINE</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.methodDeclBracePlacement>
+        <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.wrapCommentText>false</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.wrapCommentText>
+        <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.preserveNewLinesInComments>true</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.preserveNewLinesInComments>
     </properties>
 </project-shared-configuration>
