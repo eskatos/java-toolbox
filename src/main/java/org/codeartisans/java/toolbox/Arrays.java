@@ -16,6 +16,9 @@ package org.codeartisans.java.toolbox;
 public class Arrays
 {
 
+    /**
+     * @return TRUE if the array is null or empty, otherwise return FALSE
+     */
     public static boolean isEmpty( Object[] array )
     {
         return array == null || array.length < 1;

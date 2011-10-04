@@ -15,8 +15,8 @@ package org.codeartisans.java.toolbox;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class CollectionsUtilsTests
@@ -30,36 +30,36 @@ public class CollectionsUtilsTests
     @Test
     public void testEquals()
     {
-        assertTrue( CollectionUtils.collectionEquals( LEFT, LEFT ) );
-        assertTrue( CollectionUtils.collectionEquals( RIGHT, RIGHT ) );
+        assertTrue( Collections.collectionEquals( LEFT, LEFT ) );
+        assertTrue( Collections.collectionEquals( RIGHT, RIGHT ) );
 
-        assertFalse( CollectionUtils.collectionEquals( RIGHT, LEFT ) );
-        assertFalse( CollectionUtils.collectionEquals( LEFT, RIGHT ) );
+        assertFalse( Collections.collectionEquals( RIGHT, LEFT ) );
+        assertFalse( Collections.collectionEquals( LEFT, RIGHT ) );
 
     }
 
     @Test
     public void testRemoved()
     {
-        assertTrue( CollectionUtils.collectionEquals( Collections.emptyList(), CollectionUtils.removed( null, RIGHT ) ) );
-        assertTrue( CollectionUtils.collectionEquals( Collections.emptyList(), CollectionUtils.removed( Collections.<String>emptyList(), RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( java.util.Collections.emptyList(), Collections.removed( null, RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( java.util.Collections.emptyList(), Collections.removed( java.util.Collections.<String>emptyList(), RIGHT ) ) );
 
-        assertTrue( CollectionUtils.collectionEquals( LEFT, CollectionUtils.removed( LEFT, null ) ) );
-        assertTrue( CollectionUtils.collectionEquals( LEFT, CollectionUtils.removed( LEFT, Collections.<String>emptyList() ) ) );
+        assertTrue( Collections.collectionEquals( LEFT, Collections.removed( LEFT, null ) ) );
+        assertTrue( Collections.collectionEquals( LEFT, Collections.removed( LEFT, java.util.Collections.<String>emptyList() ) ) );
 
-        assertTrue( CollectionUtils.collectionEquals( REMOVED_EXPECTED, CollectionUtils.removed( LEFT, RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( REMOVED_EXPECTED, Collections.removed( LEFT, RIGHT ) ) );
     }
 
     @Test
     public void testAdded()
     {
-        assertTrue( CollectionUtils.collectionEquals( Collections.emptyList(), CollectionUtils.added( LEFT, null ) ) );
-        assertTrue( CollectionUtils.collectionEquals( Collections.emptyList(), CollectionUtils.added( LEFT, Collections.<String>emptyList() ) ) );
+        assertTrue( Collections.collectionEquals( java.util.Collections.emptyList(), Collections.added( LEFT, null ) ) );
+        assertTrue( Collections.collectionEquals( java.util.Collections.emptyList(), Collections.added( LEFT, java.util.Collections.<String>emptyList() ) ) );
 
-        assertTrue( CollectionUtils.collectionEquals( RIGHT, CollectionUtils.added( null, RIGHT ) ) );
-        assertTrue( CollectionUtils.collectionEquals( RIGHT, CollectionUtils.added( Collections.<String>emptyList(), RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( RIGHT, Collections.added( null, RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( RIGHT, Collections.added( java.util.Collections.<String>emptyList(), RIGHT ) ) );
 
-        assertTrue( CollectionUtils.collectionEquals( ADDED_EXPECTED, CollectionUtils.added( LEFT, RIGHT ) ) );
+        assertTrue( Collections.collectionEquals( ADDED_EXPECTED, Collections.added( LEFT, RIGHT ) ) );
     }
 
 }

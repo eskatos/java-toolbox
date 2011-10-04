@@ -13,15 +13,21 @@
  */
 package org.codeartisans.java.toolbox;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
-public final class CollectionUtils
+public final class Collections
 {
 
-    private CollectionUtils()
+    private Collections()
     {
     }
 
+    /**
+     * @return TRUE if the {@link Iterable} is null or empty, otherwise return FALSE
+     */
     public static boolean isEmpty( Iterable<?> iterable )
     {
         if ( iterable == null ) {
@@ -30,6 +36,9 @@ public final class CollectionUtils
         return iterable.iterator().hasNext();
     }
 
+    /**
+     * @return The first element of the {@link Iterable} or null if it is null or empty.
+     */
     public static <T> T firstElementOrNull( final Iterable<T> iterable )
     {
         if ( iterable == null ) {
@@ -43,6 +52,12 @@ public final class CollectionUtils
         }
     }
 
+    /**
+     * Filter a {@link List} using {@link Filter}s and return a new {@link List}.
+     *
+     * {@link Filter}s are applied in given order on each element from source collection.<br/>
+     * The returned collection contain all the source elements accepted by at least one {@link Filter}.
+     */
     public static <T> List<T> filter( List<T> list, Filter<T>... filters )
     {
         if ( Arrays.isEmpty( filters ) ) {
@@ -51,6 +66,12 @@ public final class CollectionUtils
         return filterToList( list, filters );
     }
 
+    /**
+     * Filter a {@link Collection} using {@link Filter}s and return a new {@link Collection}.
+     *
+     * {@link Filter}s are applied in given order on each element from source collection.<br/>
+     * The returned collection contain all the source elements accepted by at least one {@link Filter}.
+     */
     public static <T> Collection<T> filter( Collection<T> list, Filter<T>... filters )
     {
         if ( Arrays.isEmpty( filters ) ) {
@@ -59,6 +80,12 @@ public final class CollectionUtils
         return filterToList( list, filters );
     }
 
+    /**
+     * Filter an {@link Iterable} using {@link Filter}s and return a new {@link Iterable}.
+     *
+     * {@link Filter}s are applied in given order on each element from source collection.<br/>
+     * The returned collection contain all the source elements accepted by at least one {@link Filter}.
+     */
     public static <T> Iterable<T> filter( Iterable<T> list, Filter<T>... filters )
     {
         if ( Arrays.isEmpty( filters ) ) {
@@ -111,7 +138,7 @@ public final class CollectionUtils
     public static <T> Collection<T> removed( Collection<T> left, Collection<T> right )
     {
         if ( left == null || left.isEmpty() ) {
-            return Collections.emptyList();
+            return java.util.Collections.emptyList();
         }
         if ( right == null || right.isEmpty() ) {
             return new ArrayList<T>( left );
@@ -134,7 +161,7 @@ public final class CollectionUtils
     public static <T> Collection<T> added( Collection<T> left, Collection<T> right )
     {
         if ( right == null || right.isEmpty() ) {
-            return Collections.emptyList();
+            return java.util.Collections.emptyList();
         }
         if ( left == null || left.isEmpty() ) {
             return new ArrayList<T>( right );

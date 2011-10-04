@@ -13,21 +13,16 @@
  */
 package org.codeartisans.java.toolbox;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.codeartisans.java.toolbox.io.IO;
 
-public final class StringUtils
+public final class Strings
 {
 
     public static final String EMPTY = "";
@@ -39,16 +34,25 @@ public final class StringUtils
     private static final Pattern TEMPLATE_TOKEN_PATTERN = Pattern.compile( TEMPLATE_TOKEN_PATTERN_STR );
     private static final String ERROR_STRINGREADER_ON_STRING = "Unable to read a String using a StringReader, something went really bad!";
 
+    /**
+     * @return TRUE if the {@link String} is null or empty, otherwise return FALSE
+     */
     public static boolean isEmpty( String s )
     {
         return s == null || s.length() <= 0;
     }
 
+    /**
+     * @return TRUE if the char[] is null or empty, otherwise return FALSE
+     */
     public static boolean isEmpty( char[] array )
     {
         return array == null || array.length <= 0;
     }
 
+    /**
+     * Fully read the {@link Reader} and return its content as a {@link String}.
+     */
     public static String toString( Reader input )
             throws IOException
     {
@@ -242,7 +246,7 @@ public final class StringUtils
         return buffer.toString();
     }
 
-    private StringUtils()
+    private Strings()
     {
     }
 
