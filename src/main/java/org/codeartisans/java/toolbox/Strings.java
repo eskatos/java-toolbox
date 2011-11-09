@@ -26,6 +26,7 @@ public final class Strings
 {
 
     public static final String EMPTY = "";
+    public static final String ETC = "…";
     public static final String SPACE = " ";
     public static final String TAB = "\t";
     public static final String NEWLINE = "\n";
@@ -244,6 +245,130 @@ public final class Strings
             }
         }
         return buffer.toString();
+    }
+
+    public static String max( String string, int maxLength )
+    {
+        if ( string == null ) {
+            return EMPTY;
+        }
+        if ( maxLength < 0 ) {
+            maxLength = 0;
+        }
+        if ( string.length() < maxLength ) {
+            return EMPTY + string;
+        }
+        return string.substring( 0, maxLength );
+    }
+
+    public static String maxWordedEtc( String string, int maxLength )
+    {
+        if ( string == null ) {
+            return EMPTY;
+        }
+        if ( maxLength < 0 ) {
+            maxLength = 0;
+        }
+        if ( string.length() <= maxLength ) {
+            return EMPTY + string;
+        }
+        return string.substring( 0, maxLength - 1 ).trim() + ETC;
+    }
+
+    public static int firstIndexOfNonWhiteSpace( String string )
+    {
+        if ( isEmpty( string ) ) {
+            return 0;
+        }
+        int left = 0;
+        for ( char eachChar : string.toCharArray() ) {
+            if ( eachChar != ' ' && eachChar != '\t' ) {
+                break;
+            }
+            left++;
+        }
+        return left;
+    }
+
+    public static int lastInfexOfNonWhiteSpace( String string )
+    {
+        if ( isEmpty( string ) ) {
+            return 0;
+        }
+        int right = string.length();
+        char[] chars = string.toCharArray();
+        for ( int idx = right - 1; idx > 0; idx-- ) {
+            char eachChar = chars[idx];
+            if ( eachChar != ' ' && eachChar != '\t' ) {
+                break;
+            }
+            right--;
+        }
+        return right;
+    }
+
+    public static String trim( String string )
+    {
+        if ( isEmpty( string ) ) {
+            return EMPTY;
+        }
+        return string.trim();
+    }
+
+    public static String trimLeft( String string )
+    {
+        if ( isEmpty( string ) ) {
+            return EMPTY;
+        }
+        return string.substring( firstIndexOfNonWhiteSpace( string ) );
+    }
+
+    public static String trimRight( String string )
+    {
+        if ( isEmpty( string ) ) {
+            return EMPTY;
+        }
+        return string.substring( 0, lastInfexOfNonWhiteSpace( string ) );
+    }
+
+    public static String verticalTrimLines( String string )
+    {
+        return verticalTrimLines( string.split( "\n" ) );
+    }
+
+    public static String verticalTrimLines( String[] lines )
+    {
+        return verticalTrimLines( Arrays.asList( lines ) );
+    }
+
+    public static String verticalTrimLines( Iterable<String> lines )
+    {
+        Iterator<String> it = lines.iterator();
+        if ( it.hasNext() ) {
+            String firstLine = it.next();
+            if ( !it.hasNext() ) {
+                return trim( firstLine );
+            }
+        }
+        int maxLeftTrim = Integer.MAX_VALUE;
+        it = lines.iterator();
+        while ( it.hasNext() ) {
+            String eachLine = it.next();
+            if ( !trim( eachLine ).isEmpty() ) {
+                int firstNonWhite = firstIndexOfNonWhiteSpace( eachLine );
+                if ( firstNonWhite < maxLeftTrim ) {
+                    maxLeftTrim = firstNonWhite;
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for ( String eachLine : lines ) {
+            if ( !trim( eachLine ).isEmpty() ) {
+                sb.append( trimRight( eachLine.substring( maxLeftTrim ) ) );
+            }
+            sb.append( NEWLINE );
+        }
+        return sb.toString();
     }
 
     private Strings()
