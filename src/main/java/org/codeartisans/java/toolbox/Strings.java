@@ -25,6 +25,15 @@ import org.codeartisans.java.toolbox.io.IO;
 public final class Strings
 {
 
+    /**
+     * @deprecated Use {@link #lastIndexOfNonWhiteSpace(java.lang.String) instead.
+     */
+    @Deprecated
+    public static int lastInfexOfNonWhiteSpace( String string )
+    {
+        return lastIndexOfNonWhiteSpace( string );
+    }
+
     public static final String EMPTY = "";
     public static final String ETC = "…";
     public static final String SPACE = " ";
@@ -290,7 +299,7 @@ public final class Strings
         return left;
     }
 
-    public static int lastInfexOfNonWhiteSpace( String string )
+    public static int lastIndexOfNonWhiteSpace( String string )
     {
         if ( isEmpty( string ) ) {
             return 0;
@@ -328,7 +337,7 @@ public final class Strings
         if ( isEmpty( string ) ) {
             return EMPTY;
         }
-        return string.substring( 0, lastInfexOfNonWhiteSpace( string ) );
+        return string.substring( 0, lastIndexOfNonWhiteSpace( string ) );
     }
 
     public static String verticalTrimLines( String string )
